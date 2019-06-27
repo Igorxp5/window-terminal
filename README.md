@@ -1,4 +1,4 @@
-# window-terminal
+# window-terminal [![Python versions](https://img.shields.io/badge/python-3-brightgreen.svg)](https://www.python.org/)
 
 **window-terminal** is a Python module for start new Terminal Window with print and input control.
 
