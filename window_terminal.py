@@ -28,8 +28,14 @@ class WindowTerminal():
     BIND_IP = '127.0.0.1'
 
     PROCESSES_COMMANDS = {
-        'window': ('start', '/wait', 'cmd', '/c', 'python'),
-        'gnome': ('gnome-terminal', '--command=python3')
+        'window': {
+            'arg': ('start', '/wait', 'cmd', '/c', 'python'), 
+            'shell': True
+        },
+        'gnome': {
+            'arg': ('gnome-terminal', '--command=python3'), 
+            'shell': False
+        }
     }
 
     SOCKET_TIMEOUT = 3
@@ -131,9 +137,11 @@ class WindowTerminal():
     def _start_window(self):
         this_script = os.path.basename(__file__)
         ip, port = self._server_address
-        command = list(WindowTerminal._process_command)
+        arg = WindowTerminal._process_command['arg']
+        shell = WindowTerminal._process_command['shell']
+        command = list(arg)
         command[-1] += f' {this_script} {self._uuid} {ip} {port}'
-        subprocess.run(command, stdout=subprocess.PIPE)
+        subprocess.Popen(command, shell=shell, stdout=subprocess.PIPE)
 
     def _shutdown(self):
         self._connection = None
@@ -156,6 +164,7 @@ class WindowTerminal():
         WindowTerminal._server_socket = socket.socket(
             socket.AF_INET, socket.SOCK_STREAM
         )
+        WindowTerminal._server_socket.bind((WindowTerminal.BIND_IP, 0))
         WindowTerminal._server_socket.settimeout(
             WindowTerminal.SOCKET_TIMEOUT
         )
@@ -166,7 +175,6 @@ class WindowTerminal():
 
     @staticmethod
     def _listen_server():
-        WindowTerminal._server_socket.bind((WindowTerminal.BIND_IP, 0))
         WindowTerminal._server_socket.listen(
             WindowTerminal.MAX_SIMULTANEOUS_WINDOW_START
         )
@@ -287,11 +295,11 @@ class WindowTerminalClient(Thread):
     def _close_response(self, nothing=None):
         self._close_flag.set()
 
-SUPPORTED_PLATFORMS = ('Window', 'Linux')
+SUPPORTED_PLATFORMS = ('Windows', 'Linux')
 
 assert (platform.system() in SUPPORTED_PLATFORMS), 'Platform not supported'
 
-if platform.system() == 'Window':
+if platform.system() == 'Windows':
     WindowTerminal._process_command = (
         WindowTerminal.PROCESSES_COMMANDS['window']
     )
