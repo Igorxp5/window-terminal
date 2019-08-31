@@ -4,7 +4,7 @@
 
 ## Installation
 
-Clone from this repository.
+Install from pip.
 
 ```bash
 pip install window-terminal

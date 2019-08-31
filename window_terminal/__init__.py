@@ -22,7 +22,7 @@ class WindowTerminal():
 
     PROCESSES_COMMANDS = {
         'window': {
-            'arg': ('start', '/wait', 'cmd', '/c', 'python'), 
+            'arg': ('start', '/wait', 'cmd', '/c', 'python {}'), 
             'shell': True
         },
         'gnome': {
