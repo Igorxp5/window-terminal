@@ -3,7 +3,7 @@ __email__ = 'rogixp5@gmail.com'
 __copyright__ = 'Copyright 2019, Igor Fernandes'
 
 __license__ = 'MIT'
-__version__ = '1.0.5'
+__version__ = '1.0.6'
 
 
 import setuptools
