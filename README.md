@@ -74,6 +74,11 @@ window3.wait_close()
 print('Window Terminal 3 was closed!')
 ```
 
+
+## Screenshot
+
+![Screenshot](screenshot-window-terminal.png)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
