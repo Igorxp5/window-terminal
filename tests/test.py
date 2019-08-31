@@ -53,7 +53,7 @@ window3.open()
 
 # We can define a function to be called when input is answered
 def input_callback(result):
-	print('Window Terminal 3 repled:', repr(result))
+	print('Window Terminal 3 replied:', repr(result))
 
 # Now, current thread not will be blocked, when 'input()' is called
 window3.input('Other input, type something more here: ', input_callback)

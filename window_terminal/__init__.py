@@ -26,7 +26,7 @@ class WindowTerminal():
             'shell': True
         },
         'gnome': {
-            'arg': ('gnome-terminal', '--command=python3'), 
+            'arg': ('gnome-terminal', '--', 'bash', '-c', 'python3 {}'), 
             'shell': False
         }
     }
@@ -128,12 +128,12 @@ class WindowTerminal():
             self._connection.send(message)
 
     def _start_window(self):
-        this_script = os.path.basename(__file__)
+        this_script = os.path.abspath(__file__)
         ip, port = self._server_address
         arg = WindowTerminal._process_command['arg']
         shell = WindowTerminal._process_command['shell']
         command = list(arg)
-        command[-1] += f' {this_script} {self._uuid} {ip} {port}'
+        command[-1] = command[-1].format(f'{this_script} {self._uuid} {ip} {port}')
         subprocess.Popen(command, shell=shell, stdout=subprocess.PIPE)
 
     def _shutdown(self):
