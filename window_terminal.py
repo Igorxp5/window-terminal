@@ -5,7 +5,7 @@ __email__ = "rogixp5@gmail.com"
 __copyright__ = "Copyright 2019, Igor Fernandes"
 
 __license__ = "MIT"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 import os
 import sys
