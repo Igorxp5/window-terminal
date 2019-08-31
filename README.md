@@ -7,7 +7,7 @@
 Clone from this repository.
 
 ```bash
-git clone https://github.com/Igorxp5/window-terminal.git
+pip install window-terminal
 ```
 
 ## Usage
